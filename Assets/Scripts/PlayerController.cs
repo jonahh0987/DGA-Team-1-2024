@@ -8,9 +8,9 @@ public class PlayerController : MonoBehaviour
 {
     //Movement Params
     private float _horizontal;
-    private float _speed = 8f;
+    private float _speed = 5f;
     private float _jumpingPower = 16f;
-    private bool _isFacingRight = true;
+    private bool _isFacingRight = false;
 
     private bool _canDoubleJump = true;
     private float _doubleJumpPower = 10f;
@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask GroundLayer;
     [SerializeField] private GameObject HoldMeter;
     [SerializeField] private SpriteRenderer PlayerSprite;
+    [SerializeField] private Animator Animator;
 
 
     private void Start()
@@ -41,6 +42,8 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         _horizontal = Input.GetAxisRaw("Horizontal");
+        //Update the animation transitions
+        Animator.SetFloat("Horizontal Speed", Mathf.Abs(_horizontal));
 
         if (IsGrounded())
         {
@@ -105,11 +108,10 @@ public class PlayerController : MonoBehaviour
         if (_isFacingRight && _horizontal < 0f || !_isFacingRight && _horizontal > 0f) 
         { 
             _isFacingRight = !_isFacingRight;
-            PlayerSprite.flipX = !_isFacingRight;
 
-            //Vector3 localScale = transform.localScale;
-            //localScale.x *= -1f;
-            //transform.localScale = localScale;
+            Vector3 localScale = transform.localScale;
+            localScale.x *= -1f;
+            transform.localScale = localScale;
         }
     }
 
