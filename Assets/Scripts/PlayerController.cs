@@ -21,6 +21,11 @@ public class PlayerController : MonoBehaviour
     private float _holdtime = 0;
     private FloatingStatusBar _holdStatusBar;
 
+    private bool high = true;
+    private float highCool = 3f;
+    private float lastHigh = 0f;
+    private float highJumpPower = 30f;
+
     [SerializeField] private Rigidbody2D RB;
     [SerializeField] private Transform GroundCheck;
     [SerializeField] private LayerMask GroundLayer;
@@ -70,6 +75,18 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonUp("Jump") && RB.velocity.y > 0f)
         {
             RB.velocity = new Vector2(RB.velocity.x, RB.velocity.y * 0.5f);
+        }
+
+        if (Input.GetKeyDown(KeyCode.H) && high)
+        {
+            RB.velocity = new Vector2(RB.velocity.x, highJumpPower);
+            high = false;
+            lastHigh = Time.time;
+        }
+
+        if (!high && Time.time > lastHigh + highCool)
+        {
+            high = true;
         }
 
         // Climbing
