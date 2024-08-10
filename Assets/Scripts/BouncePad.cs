@@ -11,6 +11,8 @@ public class BouncePad : MonoBehaviour
         if (collision.gameObject.TryGetComponent(out Rigidbody2D rigidbody))
         {
             rigidbody.velocity = new Vector2(rigidbody.velocity.x, _bouncePower);
+            //play bounce pad sfx 
+            FindObjectOfType<AudioManager>().Play("Jump", 0.8f);
         }
     }
 }

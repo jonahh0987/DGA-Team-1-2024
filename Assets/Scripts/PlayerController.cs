@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     private float _speed = 5f;
     private float _jumpingPower = 16f;
     private bool _isFacingRight = false;
+    private bool _wasGroundedOnLastFrame = true;
 
     private bool _canDoubleJump = true;
     private float _doubleJumpPower = 10f;
@@ -25,6 +26,8 @@ public class PlayerController : MonoBehaviour
     private float highCool = 3f;
     private float lastHigh = 0f;
     private float highJumpPower = 30f;
+
+
 
     [SerializeField] private Rigidbody2D RB;
     [SerializeField] private Transform GroundCheck;
@@ -50,11 +53,22 @@ public class PlayerController : MonoBehaviour
         //Update the animation transitions
         Animator.SetFloat("Horizontal Speed", Mathf.Abs(_horizontal));
 
+
+
         if (IsGrounded())
         {
             // Reset double jump when grounded. 
             _canDoubleJump = true;
+
+            // player just landed on the ground from the air
+            if (!_wasGroundedOnLastFrame)
+            {
+                // play land sfx
+                FindObjectOfType<AudioManager>().Play(Random.Range(1, 3) == 1 ? "Walk1" : "Walk2");
+            }
         }
+
+        _wasGroundedOnLastFrame = IsGrounded();
 
         // Jumping
         if (Input.GetButtonDown("Jump"))
@@ -62,11 +76,16 @@ public class PlayerController : MonoBehaviour
             if (IsGrounded())
             {
                 RB.velocity = new Vector2(RB.velocity.x, _jumpingPower);
+                // play jump SFX
+                FindObjectOfType<AudioManager>().Play("Jump", 0.8f);
             } 
             else if (_canDoubleJump)
             {
                 _canDoubleJump = false;
                 RB.velocity = new Vector2(RB.velocity.x, _doubleJumpPower);
+
+                // play double jump SFX
+                FindObjectOfType<AudioManager>().Play("DoubleJump", 0.8f);
             }
            
         }
@@ -148,6 +167,9 @@ public class PlayerController : MonoBehaviour
             _isHoldingOn = true;
             _holdtime = 0;
             _canDoubleJump = false;
+
+            // play climb sfx
+            FindObjectOfType<AudioManager>().Play(Random.Range(1, 3) == 1 ? "Climb1" : "Climb2");
         }
     }
 
@@ -159,5 +181,16 @@ public class PlayerController : MonoBehaviour
             _isHoldingOn = false;
             _canDoubleJump = true;
         }
+    }
+
+
+    //play the soundeffect for walking
+    private void PlayWalkSound()
+    {
+        if (IsGrounded())
+        {
+            FindObjectOfType<AudioManager>().Play(Random.Range(1, 3) == 1 ? "Walk1" : "Walk2");
+        }
+        
     }
 }

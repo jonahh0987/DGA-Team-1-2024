@@ -577,6 +577,75 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5829859842854433140, guid: a4f22aec1d2dae345bff0130f1b409ad, type: 3}
   m_PrefabInstance: {fileID: 433468684739575239}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &917486002
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 917486004}
+  - component: {fileID: 917486003}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &917486003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 917486002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e9d507343adfee4f87261479edc31c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Sounds:
+  - name: Climb1
+    clip: {fileID: 8300000, guid: a720bc6682649144a918bfe516357f6d, type: 3}
+    volume: 1
+    pitch: 1
+  - name: Climb2
+    clip: {fileID: 8300000, guid: 66005bdd2ae94594784a63205b5bd501, type: 3}
+    volume: 1
+    pitch: 0
+  - name: Jump
+    clip: {fileID: 8300000, guid: 262432adbbec3674d826fd984409d938, type: 3}
+    volume: 1
+    pitch: 0
+  - name: DoubleJump
+    clip: {fileID: 8300000, guid: 4f64be111ab79cd4984252ed0ccafcd0, type: 3}
+    volume: 1
+    pitch: 0
+  - name: Walk1
+    clip: {fileID: 8300000, guid: a802cb7f61589a547921b1a42ef2bd0a, type: 3}
+    volume: 1
+    pitch: 0
+  - name: Walk2
+    clip: {fileID: 8300000, guid: ab7e0009f0621d341bbe81f808c43cf4, type: 3}
+    volume: 1
+    pitch: 0
+--- !u!4 &917486004
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 917486002}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.8642092, y: -3.025998, z: 0.022820853}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &937144939
 GameObject:
   m_ObjectHideFlags: 0
@@ -705,7 +774,7 @@ TilemapRenderer:
   m_MaxFrameAge: 16
   m_SortOrder: 0
   m_Mode: 0
-  m_DetectChunkCullingBounds: 0
+  m_DetectChunkCullingBounds: 1
   m_MaskInteraction: 0
 --- !u!1839735485 &999609005
 Tilemap:
@@ -5105,3 +5174,4 @@ SceneRoots:
   - {fileID: 1562732453}
   - {fileID: 23525882}
   - {fileID: 937144941}
+  - {fileID: 917486004}
